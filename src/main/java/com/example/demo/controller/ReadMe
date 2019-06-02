@@ -1,0 +1,9 @@
+调用方法记得加上整个controller的RequestMapping的路径
+比如: localhost:9900/OrderController/...     端口暂定9900
+主要使用@PathVariable 和 @RequestBody 注解传递参数
+看清楚get还是post方法
+QueryController 暂时作废
+订单的状态具体什么设置? 0未支付  1放弃  2支付成功??
+
+关于爬虫部分也需要讨论一下,Shop,Dish对象的字段问题
+有什么问题通知陆梅临，别自己修改!!!!!!
