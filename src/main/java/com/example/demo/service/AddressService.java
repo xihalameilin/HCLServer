@@ -8,4 +8,8 @@ public interface AddressService {
      List<Address> getAllAddressesByUserID(Integer userID);
 
      void setDefaultAddress(Integer userID,Integer addressID);
+
+     void insertAddress(Address address);
+
+     void deleteAddress(Integer addressID);
 }

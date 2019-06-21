@@ -30,7 +30,7 @@ public class ShopDaoImpl extends BaseDaoImpl implements ShopDao {
     @Override
     public Shop getShopByShopID(Integer shopID) {
         Session session = HibernateUtils.getSession();
-        Query<Shop> query = session.createQuery("select Shop from Shop where shopID =:n ");
+        Query<Shop> query = session.createQuery("from Shop where shopID =:n ");
         query.setParameter("n",shopID);
         List<Shop> shops = query.getResultList();
         HibernateUtils.closeSession(session);
@@ -57,5 +57,25 @@ public class ShopDaoImpl extends BaseDaoImpl implements ShopDao {
         double result=((double) query.uniqueResult());
         HibernateUtils.closeSession(session);
         return result;
+    }
+
+    @Override
+    public List<Shop> getAllShopsByType(String type) {
+        Session session = HibernateUtils.getSession();
+        Query<Shop> query = session.createQuery("from Shop where type =:t ");
+        query.setParameter("t",type);
+        List<Shop> shops = query.getResultList();
+        HibernateUtils.closeSession(session);
+        return shops;
+    }
+
+    @Override
+    public List<Shop> getAllShopByKeyword(String keyword) {
+        Session session = HibernateUtils.getSession();
+        Query<Shop> query = session.createQuery("from Shop where name like :t");
+        query.setParameter("t","%"+keyword+"%");
+        List<Shop> shops = query.getResultList();
+        HibernateUtils.closeSession(session);
+        return shops;
     }
 }

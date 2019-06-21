@@ -18,4 +18,6 @@ public interface OrderDao {
      Order getOrderByOrderID(Integer orderID);
 
      List<Order> getAllOrdersByShopID(Integer shopID);
+
+     public List<Order> getAllOrdersByUserID(int userID);
 }

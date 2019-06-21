@@ -41,4 +41,14 @@ public class ShopServiceImpl implements ShopService {
         return shopDao.getShopByShopID(shopID);
     }
 
+    @Override
+    public List<Shop> getAllShopsByType(String type) {
+        return shopDao.getAllShopsByType(type);
+    }
+
+    @Override
+    public List<Shop> getAllShopByKeyword(String keyword) {
+        return shopDao.getAllShopByKeyword(keyword);
+    }
+
 }

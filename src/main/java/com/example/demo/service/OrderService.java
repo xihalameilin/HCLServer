@@ -16,4 +16,6 @@ public interface OrderService {
 
      List<Order> getAllOrdersByShopID(Integer shopID);
 
+     List<Order> getThreeMonths(int userID);
+
 }

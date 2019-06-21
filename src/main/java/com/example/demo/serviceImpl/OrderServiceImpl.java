@@ -8,6 +8,10 @@ import com.example.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -49,6 +53,28 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<Order> getAllOrdersByShopID(Integer shopID) {
         return orderDao.getAllOrdersByShopID(shopID);
+    }
+
+    /**
+     * @Author : gsy
+     * @param userID
+     * @return得到3个月的订单
+     */
+    @Override
+    public List<Order> getThreeMonths(int userID) {
+        ArrayList<Order> orderArrayList = (ArrayList)orderDao.getAllOrdersByUserID(userID);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        Date dt1 = new Date();
+        Date dt2 = new Date();
+        ArrayList<Order> resultlists=new ArrayList<>();
+        dt2.setMonth(dt2.getMonth()-3);
+        for (int i =0 ;i < orderArrayList.size();i++){
+            Order o = orderArrayList.get(i);
+            if ( o.getDate().getTime()<=dt1.getTime()&&dt2.getTime()<=o.getDate().getTime()){
+                resultlists.add(o);
+            }
+        }
+        return resultlists;
     }
 
 

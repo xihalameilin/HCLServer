@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public class AddressDaoImpl implements AddressDao {
+public class AddressDaoImpl extends BaseDaoImpl implements AddressDao {
     @Override
     public List<Address> getAllAddressesByUserID(Integer userID) {
         Session session = HibernateUtils.getSession();
@@ -38,5 +38,16 @@ public class AddressDaoImpl implements AddressDao {
         transaction.commit();
         HibernateUtils.closeSession(session);
 
+    }
+
+    @Override
+    public void delete(Integer addressID) {
+        Session session = HibernateUtils.getSession();
+        Transaction transaction = session.beginTransaction();
+        Query<Address> query = session.createQuery("DELETE from Address where id = :i");
+        query.setParameter("i",addressID);
+        query.executeUpdate();
+        transaction.commit();
+        HibernateUtils.closeSession(session);
     }
 }

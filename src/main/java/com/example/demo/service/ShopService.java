@@ -12,4 +12,8 @@ public interface ShopService {
      void registerShop(Shop shop);
 
      Shop getShopByShopID(Integer shopID);
+
+     List<Shop> getAllShopsByType(String type);
+
+     List<Shop> getAllShopByKeyword(String keyword);
 }

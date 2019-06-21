@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Set;
 
 
@@ -64,20 +65,11 @@ public class UserController {
      *{
         "name":"lml",
         "password":"123",
-        "email":"1293086146@qq.com",
-        "address":[
-        {"address":"新街口","state":1},
-        {"address":"南京大学","state":0},
-        {"address":"鼓楼","state":0}
-        ]
+        "email":"1293086146@qq.com"
         }
      */
     @PostMapping("/userRegister")
     public void registerUser(@RequestBody User user){
-        Set<Address> addresses = user.getAddress();
-        for(Address address:addresses){
-            address.setUser(user);
-        }
         userService.insertUser(user);
     }
 
@@ -97,6 +89,7 @@ public class UserController {
      *@Author : LML
      *@Date : 21:40 2019/6/2
      *@Desciption : 邮箱是否可用
+     *@res   可用为true
      */
     @GetMapping("/CheckEmail/{email}")
     public boolean isEmailIDValid(@PathVariable String email){
@@ -111,7 +104,7 @@ public class UserController {
      * @param email
      * @param content   验证码
      */
-    @GetMapping("/SendMail/{email}/{content}")
+    @GetMapping("/sendMail/{email}/{content}")
     public void sendIdentityCode(@PathVariable String email,@PathVariable String content){
         try {
             emailService.sendEmail(content,email);
@@ -156,6 +149,28 @@ public class UserController {
     @PostMapping("/setDefaultAddress/{userID}/{addressID}")
     public void setDefaultAddress(@PathVariable Integer userID,@PathVariable Integer addressID){
         addressService.setDefaultAddress(userID,addressID);
+    }
+
+
+    /**
+     *@Author : LML
+     *@Date : 21:40 2019/6/2
+     *@Desciption : 根据 userID 与 address新增一个地址
+     */
+    @PostMapping("/addAddress/{userID}/{address}")
+    public void addAddress(@PathVariable Integer userID,@PathVariable String address){
+        User user = userService.getUserByID(userID);
+        Address add = new Address();
+        add.setAddress(address);
+        add.setUser(user);
+        add.setState(0);
+        addressService.insertAddress(add);
+    }
+
+
+    @PostMapping("/deleteAddress/{addressID}")
+    public void deleteAddress(@PathVariable Integer addressID){
+        addressService.deleteAddress(addressID);
     }
 
 }

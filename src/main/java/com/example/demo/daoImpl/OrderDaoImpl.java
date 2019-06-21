@@ -73,4 +73,19 @@ public class OrderDaoImpl implements OrderDao {
         HibernateUtils.closeSession(session);
         return orders;
     }
+
+    /**
+     * @Author: gsy
+     * @param userID
+     * @return Orderlist
+     */
+    @Override
+    public List<Order> getAllOrdersByUserID(int userID) {
+        Session session=HibernateUtils.getSession();
+        Query<Order> query = session.createQuery("from Order where userID=" + userID);
+        List<Order> orders = query.getResultList();
+        HibernateUtils.closeSession(session);
+        return orders;
+    }
+
 }

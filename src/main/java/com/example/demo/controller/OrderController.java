@@ -86,4 +86,16 @@ public class OrderController {
         orderService.changeState(orderID,state);
     }
 
+
+
+    /**
+     * @Author : GSY
+     * @Desciption : 得到3个月的订单
+     */
+    @GetMapping("/GetThreeMonths/{userID}")
+    public String GetThreeMonths(@PathVariable int userID){
+        return new JSONArray(orderService.getThreeMonths(userID)).toString();
+    }
+
+
 }

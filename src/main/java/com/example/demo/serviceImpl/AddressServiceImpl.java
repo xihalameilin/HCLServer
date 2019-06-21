@@ -24,4 +24,14 @@ public class AddressServiceImpl implements AddressService {
     public void setDefaultAddress(Integer userID, Integer addressID) {
         addressDao.setDefaultAddress(userID,addressID);
     }
+
+    @Override
+    public void insertAddress(Address address) {
+        addressDao.insert(address);
+    }
+
+    @Override
+    public void deleteAddress(Integer addressID) {
+        addressDao.delete(addressID);
+    }
 }

@@ -13,4 +13,8 @@ public interface ShopDao extends BaseDao {
      int getCount();
 
      double getTotal();
+
+     List<Shop> getAllShopsByType(String type);
+
+     List<Shop> getAllShopByKeyword(String keyword);
 }

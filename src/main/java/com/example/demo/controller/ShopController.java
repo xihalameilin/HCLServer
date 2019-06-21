@@ -40,4 +40,26 @@ public class ShopController {
     public String getAllDishesByShopID(@PathVariable Integer shopID){
         return new org.json.JSONArray(dishService.getAllDishesByShopID(shopID)).toString();
     }
+
+
+    /**
+     *@Author : LML
+     *@Date : 21:40 2019/6/2
+     *@Desciption : 根据类型得到所有的店铺
+     */
+    @GetMapping("/getAllShopsByType/{type}")
+    public String getAllShopsByType(@PathVariable String type){
+        return new org.json.JSONArray(shopService.getAllShopsByType(type)).toString();
+    }
+
+    /**
+     *@Author : LML
+     *@Date : 21:40 2019/6/2
+     *@Desciption : 搜索店铺
+     */
+    @GetMapping("/getAllShopsByKeyword/{keyword}")
+    public String getAllShopsByKeyword(@PathVariable String keyword){
+        return new org.json.JSONArray(shopService.getAllShopByKeyword(keyword)).toString();
+    }
+
 }
