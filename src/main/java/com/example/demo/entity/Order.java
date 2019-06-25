@@ -19,6 +19,8 @@ public class Order {
 
     private Integer userID;
 
+    private String name;
+
     private String address;
 
     private Date date;
@@ -26,6 +28,14 @@ public class Order {
     private Integer state;
 
     private double total;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @OneToMany(mappedBy = "order",cascade = {CascadeType.ALL})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
