@@ -11,6 +11,8 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private Integer iid;
+
     private String name;
 
     private double price;
@@ -18,6 +20,14 @@ public class OrderItem {
     private Integer num;
 
     private double total;
+
+    public Integer getIid() {
+        return iid;
+    }
+
+    public void setIid(Integer iid) {
+        this.iid = iid;
+    }
 
     @ManyToOne(targetEntity = Order.class)
     @JoinColumn(name = "orderID")
